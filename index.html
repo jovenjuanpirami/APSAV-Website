@@ -289,51 +289,164 @@ body {
   background: rgba(196,154,60,0.07);
 }
 
-/* HERO VIDEO */
+/* HERO ANIMATION */
 .hero-visual {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
 }
 
-.hero-video-wrap {
-  position: relative;
+.hero-anim {
   width: 100%;
+  background: rgba(12,27,46,0.55);
+  border: 1px solid rgba(196,154,60,0.25);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(196,154,60,0.28);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(196,154,60,0.1);
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
 }
 
-.hero-video {
-  display: block;
-  width: 100%;
-  height: auto;
+.anim-progress-track {
+  height: 2px;
+  background: rgba(196,154,60,0.12);
+  flex-shrink: 0;
 }
 
-.hero-video-overlay {
+.anim-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.anim-body {
+  flex: 1;
+  position: relative;
+  padding: 2rem 1.8rem 1.5rem;
+}
+
+.anim-slide {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 60%,
-    rgba(12,27,46,0.45) 100%
-  );
+  padding: 2rem 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(10px);
   pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
-.hero-video-badge {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-  background: rgba(12,27,46,0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(196,154,60,0.3);
-  border-radius: var(--radius-pill);
-  padding: 0.35rem 0.8rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
+.anim-slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.anim-ghost-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 600;
+  color: rgba(196,154,60,0.08);
+  line-height: 1;
+  margin-bottom: -2.5rem;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+.anim-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.anim-icon-wrap {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.anim-eyebrow {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.anim-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.anim-desc {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.65;
+  font-weight: 300;
+  flex: 1;
+}
+
+.anim-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  background: rgba(196,154,60,0.1);
+  border: 1px solid rgba(196,154,60,0.2);
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.65rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  font-weight: 500;
+}
+
+.anim-footer {
+  padding: 0.9rem 1.8rem;
+  border-top: 1px solid rgba(196,154,60,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.anim-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.anim-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(196,154,60,0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, width 0.3s, border-radius 0.3s;
+}
+
+.anim-dot.active {
+  background: var(--gold);
+  width: 18px;
+  border-radius: 3px;
+}
+
+.anim-counter {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+}
+
+.anim-counter strong {
   color: var(--gold-light);
   font-weight: 500;
 }
@@ -1074,14 +1187,199 @@ body {
     </div>
 
     <div class="hero-visual">
-      <div class="hero-video-wrap">
-        <video class="hero-video" autoplay muted loop playsinline>
-          <source src="Assets/Juan%20Pablo's%20video%20%285%29.mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-overlay"></div>
-        <div class="hero-video-badge" data-es>Servicios APSAV</div>
-        <div class="hero-video-badge" data-en>APSAV Services</div>
-      </div>
+      <div class="hero-anim" id="heroAnim">
+
+        <div class="anim-progress-track">
+          <div class="anim-progress-fill" id="animProgress"></div>
+        </div>
+
+        <div class="anim-body">
+
+          <!-- Slide 1: Think Tank -->
+          <div class="anim-slide active">
+            <div class="anim-ghost-num">01</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="11" r="6.5" stroke="#C49A3C" stroke-width="1.2"/>
+                  <path d="M10.5 16.5 Q10.5 21 14 21 Q17.5 21 17.5 16.5" stroke="#C49A3C" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+                  <line x1="14" y1="21" x2="14" y2="24" stroke="#C49A3C" stroke-width="0.9"/>
+                  <line x1="11.5" y1="24" x2="16.5" y2="24" stroke="#C49A3C" stroke-width="0.9" stroke-linecap="round"/>
+                  <line x1="11" y1="8.5" x2="17" y2="8.5" stroke="#C49A3C" stroke-width="0.7"/>
+                  <line x1="11" y1="11" x2="17" y2="11" stroke="#C49A3C" stroke-width="0.7"/>
+                  <line x1="12" y1="13.5" x2="16" y2="13.5" stroke="#C49A3C" stroke-width="0.7"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Eje Fundacional</div>
+              <div class="anim-eyebrow" data-en>Foundational Pillar</div>
+            </div>
+            <div class="anim-title" data-es>Autorregulación &amp; Think Tank VASP</div>
+            <div class="anim-title" data-en>Self-Regulation &amp; VASP Think Tank</div>
+            <div class="anim-desc" data-es>Producimos los protocolos de compliance del sector y construimos la ruta hacia el reconocimiento de APSAV como organismo autorregulatorio ante la UIF.</div>
+            <div class="anim-desc" data-en>We produce the sector's compliance protocols and build the path toward APSAV's recognition as a self-regulatory body before the UIF.</div>
+            <div class="anim-tag" data-es>Eje 1 · Think Tank</div>
+            <div class="anim-tag" data-en>Pillar 1 · Think Tank</div>
+          </div>
+
+          <!-- Slide 2: Lobbying -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">02</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="10" r="4.5" stroke="#C49A3C" stroke-width="1.2"/>
+                  <path d="M5.5 23.5c0-4.7 17-4.7 17 0" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                  <line x1="19.5" y1="5.5" x2="23" y2="3.5" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="20.5" y1="9" x2="24" y2="9" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="19.5" y1="13" x2="23" y2="15" stroke="#C49A3C" stroke-width="0.8"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Representación gremial</div>
+              <div class="anim-eyebrow" data-en>Industry representation</div>
+            </div>
+            <div class="anim-title" data-es>Lobbying Defensivo</div>
+            <div class="anim-title" data-en>Defensive Lobbying</div>
+            <div class="anim-desc" data-es>Interlocución directa con CNBV, UIF, Banxico y SAT. White Papers, propuestas regulatorias y agenda legislativa construidas por y para el ecosistema VASP mexicano.</div>
+            <div class="anim-desc" data-en>Direct dialogue with CNBV, UIF, Banxico and SAT. White Papers, regulatory proposals and a legislative agenda built by and for the Mexican VASP ecosystem.</div>
+            <div class="anim-tag" data-es>Eje 2 · Regulación</div>
+            <div class="anim-tag" data-en>Pillar 2 · Regulation</div>
+          </div>
+
+          <!-- Slide 3: Adopción -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">03</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="14" r="8" stroke="#C49A3C" stroke-width="1.2"/>
+                  <line x1="14" y1="6" x2="14" y2="22" stroke="#C49A3C" stroke-width="0.7"/>
+                  <path d="M10 8c0 0 4 2.5 4 6s-4 6-4 6" stroke="#C49A3C" stroke-width="0.7" fill="none"/>
+                  <path d="M18 8c0 0-4 2.5-4 6s4 6 4 6" stroke="#C49A3C" stroke-width="0.7" fill="none"/>
+                  <line x1="6" y1="14" x2="22" y2="14" stroke="#C49A3C" stroke-width="0.7"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Eventos &amp; comunidad</div>
+              <div class="anim-eyebrow" data-en>Events &amp; community</div>
+            </div>
+            <div class="anim-title" data-es>Adopción Crypto</div>
+            <div class="anim-title" data-en>Crypto Adoption</div>
+            <div class="anim-desc" data-es>Eventos presenciales, Crypto Summit regional y webinars para impulsar la adopción de activos virtuales en el sector privado, academia y gobierno mexicano.</div>
+            <div class="anim-desc" data-en>In-person events, regional Crypto Summit and webinars to drive virtual asset adoption across Mexico's private sector, academia, and government.</div>
+            <div class="anim-tag" data-es>Eje 3 · Adopción</div>
+            <div class="anim-tag" data-en>Pillar 3 · Adoption</div>
+          </div>
+
+          <!-- Slide 4: Educación Bancaria -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">04</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="8" width="22" height="14" rx="1.5" stroke="#C49A3C" stroke-width="1.2"/>
+                  <line x1="3" y1="12" x2="25" y2="12" stroke="#C49A3C" stroke-width="0.8"/>
+                  <circle cx="14" cy="17" r="2.2" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="8" y1="5" x2="8" y2="9" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round"/>
+                  <line x1="20" y1="5" x2="20" y2="9" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Sistema financiero</div>
+              <div class="anim-eyebrow" data-en>Financial system</div>
+            </div>
+            <div class="anim-title" data-es>Educación Bancaria</div>
+            <div class="anim-title" data-en>Banking Education</div>
+            <div class="anim-desc" data-es>Talleres especializados con bancos y SOFOMEs para reducir la aversión al sector VASP y construir las alianzas estratégicas que el ecosistema necesita con la banca tradicional.</div>
+            <div class="anim-desc" data-en>Specialized workshops with banks and SOFOMEs to reduce VASP sector aversion and build the strategic alliances the ecosystem needs with traditional banking.</div>
+            <div class="anim-tag" data-es>Eje 4 · Banca</div>
+            <div class="anim-tag" data-en>Pillar 4 · Banking</div>
+          </div>
+
+          <!-- Slide 5: Gateway -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">05</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="14" cy="14" r="7.5" stroke="#C49A3C" stroke-width="1.2"/>
+                  <path d="M14 6.5L14 21.5" stroke="#C49A3C" stroke-width="0.7" stroke-dasharray="1.5 1.5"/>
+                  <path d="M6.5 14L21.5 14" stroke="#C49A3C" stroke-width="0.7" stroke-dasharray="1.5 1.5"/>
+                  <path d="M9.5 9.5L21 7L18.5 18.5L7 21Z" stroke="#C49A3C" stroke-width="0.9" fill="rgba(196,154,60,0.1)" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Entrada al mercado</div>
+              <div class="anim-eyebrow" data-en>Market entry</div>
+            </div>
+            <div class="anim-title" data-es>Gateway Cripto–MX</div>
+            <div class="anim-title" data-en>Crypto–MX Gateway</div>
+            <div class="anim-desc" data-es>El punto de entrada único para proyectos cripto internacionales en México. Red integrada de aliados legales, regulatorios, bancarios y comerciales listos para recibirte.</div>
+            <div class="anim-desc" data-en>The unique entry point for international crypto projects in Mexico. Integrated network of legal, regulatory, banking and commercial partners ready to receive you.</div>
+            <div class="anim-tag" data-es>Eje 5 · Gateway</div>
+            <div class="anim-tag" data-en>Pillar 5 · Gateway</div>
+          </div>
+
+          <!-- Slide 6: Certificación -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">06</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 3L16.8 9.8L24.5 10L19 15L20.8 22.5L14 18.5L7.2 22.5L9 15L3.5 10L11.2 9.8Z" stroke="#C49A3C" stroke-width="1.1" fill="rgba(196,154,60,0.1)" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Sello de confianza</div>
+              <div class="anim-eyebrow" data-en>Trust seal</div>
+            </div>
+            <div class="anim-title" data-es>Certificación APSAV</div>
+            <div class="anim-title" data-en>APSAV Certification</div>
+            <div class="anim-desc" data-es>El sello que acredita públicamente tu cumplimiento regulatorio ante clientes, socios e instituciones. Ser miembro de APSAV es sinónimo de empresa confiable en el sector VASP mexicano.</div>
+            <div class="anim-desc" data-en>The seal that publicly accredits your regulatory compliance before clients, partners, and institutions. APSAV membership is synonymous with trusted company in the Mexican VASP sector.</div>
+            <div class="anim-tag" data-es>Eje 6 · Certificación</div>
+            <div class="anim-tag" data-en>Pillar 6 · Certification</div>
+          </div>
+
+          <!-- Slide 7: Alianzas -->
+          <div class="anim-slide">
+            <div class="anim-ghost-num">07</div>
+            <div class="anim-icon-row">
+              <div class="anim-icon-wrap">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2.5" y="5" width="23" height="17" rx="1.5" stroke="#C49A3C" stroke-width="1.2"/>
+                  <line x1="2.5" y1="10" x2="25.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="9.5" y1="5" x2="9.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="18.5" y1="5" x2="18.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+                  <circle cx="10" cy="17" r="2.5" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="14.5" y1="15.5" x2="21.5" y2="15.5" stroke="#C49A3C" stroke-width="0.8"/>
+                  <line x1="14.5" y1="18.5" x2="21.5" y2="18.5" stroke="#C49A3C" stroke-width="0.8"/>
+                </svg>
+              </div>
+              <div class="anim-eyebrow" data-es>Ecosistema empresarial</div>
+              <div class="anim-eyebrow" data-en>Business ecosystem</div>
+            </div>
+            <div class="anim-title" data-es>Alianzas con Cámaras</div>
+            <div class="anim-title" data-en>Chamber Alliances</div>
+            <div class="anim-desc" data-es>Convenios con cámaras empresariales para ofrecer soluciones de activos virtuales a sus agremiados. APSAV como puente entre el ecosistema cripto y la empresa tradicional mexicana.</div>
+            <div class="anim-desc" data-en>Agreements with business chambers to offer virtual asset solutions to their members. APSAV as the bridge between the crypto ecosystem and traditional Mexican business.</div>
+            <div class="anim-tag" data-es>Eje 7 · Alianzas</div>
+            <div class="anim-tag" data-en>Pillar 7 · Alliances</div>
+          </div>
+
+        </div><!-- /anim-body -->
+
+        <div class="anim-footer">
+          <div class="anim-dots" id="animDots">
+            <button class="anim-dot active" aria-label="Slide 1"></button>
+            <button class="anim-dot" aria-label="Slide 2"></button>
+            <button class="anim-dot" aria-label="Slide 3"></button>
+            <button class="anim-dot" aria-label="Slide 4"></button>
+            <button class="anim-dot" aria-label="Slide 5"></button>
+            <button class="anim-dot" aria-label="Slide 6"></button>
+            <button class="anim-dot" aria-label="Slide 7"></button>
+          </div>
+          <div class="anim-counter">
+            <strong id="animCurrent">01</strong> / 07
+          </div>
+        </div>
+
+      </div><!-- /hero-anim -->
     </div>
   </div>
 </section>
@@ -1614,6 +1912,55 @@ function setLang(lang) {
   if (browserLang.toLowerCase().startsWith('en')) {
     setLang('en');
   }
+})();
+
+// ── Hero axis animation ──────────────────────────────────────────────────────
+(function() {
+  const SLIDE_MS   = 2200;  // visible time per slide
+  const TOTAL      = 7;
+
+  const slides   = document.querySelectorAll('.anim-slide');
+  const dots     = document.querySelectorAll('.anim-dot');
+  const progress = document.getElementById('animProgress');
+  const counter  = document.getElementById('animCurrent');
+  let current    = 0;
+  let timer      = null;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (idx + TOTAL) % TOTAL;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    counter.textContent = pad(current + 1);
+    // restart progress bar
+    progress.style.transition = 'none';
+    progress.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        progress.style.transition = 'width ' + SLIDE_MS + 'ms linear';
+        progress.style.width = '100%';
+      });
+    });
+  }
+
+  function start() {
+    goTo(0);
+    timer = setInterval(() => goTo(current + 1), SLIDE_MS);
+  }
+
+  // dot click → jump to slide
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goTo(i);
+      timer = setInterval(() => goTo(current + 1), SLIDE_MS);
+    });
+  });
+
+  start();
 })();
 </script>
 </body>
