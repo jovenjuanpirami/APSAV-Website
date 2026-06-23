@@ -28,11 +28,6 @@
   --border:       rgba(196,154,60,0.22);
   --border-dim:   rgba(196,154,60,0.10);
 
-  /* Artu brand */
-  --artu-green:   #0b4147;
-  --artu-blue:    #2545ba;
-  --artu-aqua:    #0ad6ac;
-
   --radius-sm:    8px;
   --radius-md:    16px;
   --radius-lg:    24px;
@@ -383,7 +378,7 @@ body {
 
 /* ─── COMPLIANCE CTA STRIP ─── */
 .cta-strip {
-  background: linear-gradient(135deg, var(--artu-green) 0%, #0b4147 50%, var(--navy-mid) 100%);
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
   position: relative;
   overflow: hidden;
   padding: 4rem 2rem;
@@ -396,7 +391,7 @@ body {
   right: -10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(10,214,172,0.12) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(196,154,60,0.10) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -418,7 +413,7 @@ body {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--artu-aqua);
+  color: var(--gold-light);
   margin-bottom: 0.6rem;
 }
 
@@ -446,7 +441,7 @@ body {
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--navy);
-  background: var(--artu-aqua);
+  background: var(--gold);
   border: none;
   cursor: pointer;
   padding: 1rem 2rem;
@@ -455,13 +450,13 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
   transition: background 0.22s, transform 0.15s, box-shadow 0.22s;
-  box-shadow: 0 4px 24px rgba(10,214,172,0.35);
+  box-shadow: 0 4px 24px rgba(196,154,60,0.35);
 }
 
 .btn-compliance:hover {
-  background: #1af0c4;
+  background: var(--gold-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(10,214,172,0.5);
+  box-shadow: 0 8px 32px rgba(196,154,60,0.5);
 }
 
 .btn-compliance svg {
@@ -739,8 +734,8 @@ body {
   gap: 0.35rem;
   font-size: 0.65rem;
   font-weight: 500;
-  color: var(--artu-green);
-  background: rgba(11,65,71,0.07);
+  color: var(--navy);
+  background: rgba(196,154,60,0.12);
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
   margin-top: 0.4rem;
@@ -1314,7 +1309,7 @@ body {
           <span data-en>Annual fee by tier</span>
         </div>
         <div class="mc-deductible">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 4" stroke="#0b4147" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 4" stroke="#0C1B2E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span data-es>100% deducible de ISR</span>
           <span data-en>100% tax deductible</span>
         </div>
