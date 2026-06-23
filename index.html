@@ -289,48 +289,55 @@ body {
   background: rgba(196,154,60,0.07);
 }
 
-/* HERO VISUAL CARD */
+/* HERO VIDEO */
 .hero-visual {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-stat-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(196,154,60,0.18);
-  border-radius: var(--radius-md);
-  padding: 1.25rem 1.4rem;
+.hero-video-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(196,154,60,0.28);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(196,154,60,0.1);
+}
+
+.hero-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(12,27,46,0.45) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-video-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(12,27,46,0.75);
   backdrop-filter: blur(8px);
-}
-
-.hero-stat-card .stat-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
+  border: 1px solid rgba(196,154,60,0.3);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.35rem;
-}
-
-.hero-stat-card .stat-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 0.2rem;
-}
-
-.hero-stat-card .stat-sub {
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.45);
-  font-weight: 300;
-}
-
-.hero-stat-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  color: var(--gold-light);
+  font-weight: 500;
 }
 
 /* ─── SECTION WRAPPER ─── */
@@ -862,10 +869,112 @@ body {
   font-weight: 300;
 }
 
+/* ─── TEAM SECTION ─── */
+.team-bg { background: #fff; }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+.team-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.4rem 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow 0.22s, transform 0.22s;
+}
+
+.team-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.team-photo-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.team-initials {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  line-height: 1;
+}
+
+.team-role {
+  font-size: 0.52rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.team-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+.team-company {
+  font-size: 0.67rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+.team-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.team-tag {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.45rem;
+  background: rgba(196,154,60,0.10);
+  color: var(--gold);
+  font-weight: 500;
+  border-radius: 2px;
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  .hero-visual { display: none; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
   .pillars-grid { grid-template-columns: repeat(2, 1fr); }
   .pillar:nth-child(2n) { border-right: none; }
   .pillar:nth-child(n+5) { border-bottom: 1px solid var(--border); }
@@ -886,7 +995,7 @@ body {
   .footer-top { flex-direction: column; }
   .footer-cta-block { align-items: flex-start; }
   .footer-bottom { flex-direction: column; }
-  .hero-stat-row { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
 }
 
 /* Print */
@@ -916,6 +1025,8 @@ body {
       <a href="#ejes" class="nav-link" data-en>Value Pillars</a>
       <a href="#think-tank" class="nav-link" data-es>Think Tank</a>
       <a href="#think-tank" class="nav-link" data-en>Think Tank</a>
+      <a href="#equipo" class="nav-link" data-es>Equipo</a>
+      <a href="#equipo" class="nav-link" data-en>Team</a>
       <a href="#vision" class="nav-link" data-es>Visión SRO</a>
       <a href="#vision" class="nav-link" data-en>SRO Vision</a>
       <a href="#membresia" class="nav-link" data-es>Membresía</a>
@@ -964,34 +1075,14 @@ body {
       </div>
     </div>
 
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-stat-card">
-        <div class="stat-label" data-es>Constitución</div>
-        <div class="stat-label" data-en>Founded</div>
-        <div class="stat-value">2026</div>
-        <div class="stat-sub" data-es>Primer organismo gremial VASP en México</div>
-        <div class="stat-sub" data-en>First VASP trade body in Mexico</div>
-      </div>
-      <div class="hero-stat-row">
-        <div class="hero-stat-card">
-          <div class="stat-label">100%</div>
-          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);">VASP</div>
-          <div class="stat-sub" data-es>Especialización exclusiva</div>
-          <div class="stat-sub" data-en>Exclusive specialization</div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-label">7</div>
-          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);" data-es>Ejes</div>
-          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);" data-en>Pillars</div>
-          <div class="stat-sub" data-es>De valor para asociados</div>
-          <div class="stat-sub" data-en>Of value for members</div>
-        </div>
-      </div>
-      <div class="hero-stat-card" style="background: rgba(196,154,60,0.06); border-color: rgba(196,154,60,0.3);">
-        <div class="stat-label" data-es>Visión</div>
-        <div class="stat-label" data-en>Vision</div>
-        <div class="stat-value" style="font-size:1rem; color: var(--gold-light); line-height:1.4;" data-es>Organismo autorregulatorio reconocido ante la UIF</div>
-        <div class="stat-value" style="font-size:1rem; color: var(--gold-light); line-height:1.4;" data-en>Recognized self-regulatory body before the UIF</div>
+    <div class="hero-visual">
+      <div class="hero-video-wrap">
+        <video class="hero-video" autoplay muted loop playsinline>
+          <source src="Assets/Juan%20Pablo's%20video%20%285%29.mp4" type="video/mp4">
+        </video>
+        <div class="hero-video-overlay"></div>
+        <div class="hero-video-badge" data-es>Servicios APSAV</div>
+        <div class="hero-video-badge" data-en>APSAV Services</div>
       </div>
     </div>
   </div>
@@ -1235,6 +1326,115 @@ body {
         <p class="tt-card-desc" data-es>Acceso al Consejo Directivo y red de aliados de APSAV para decisiones críticas de negocio y regulación. Inteligencia colectiva del sector.</p>
         <p class="tt-card-desc" data-en>Access to APSAV's Board of Directors and partner network for critical business and regulatory decisions. Collective sector intelligence.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOUNDING TEAM ─── -->
+<section class="team-bg" id="equipo" aria-labelledby="team-title">
+  <div class="section">
+    <div class="section-label">
+      <span data-es>Socios Fundadores · Consejo Directivo</span>
+      <span data-en>Founding Partners · Board of Directors</span>
+    </div>
+    <h2 class="section-title" id="team-title">
+      <span data-es>El equipo que lidera el sector</span>
+      <span data-en>The team leading the sector</span>
+    </h2>
+    <p class="section-desc">
+      <span data-es>Cinco líderes con experiencia en regulación, tecnología, banca y ecosistema cripto construyeron APSAV para representar y proteger al sector VASP en México.</span>
+      <span data-en>Five leaders with expertise in regulation, technology, banking, and the crypto ecosystem built APSAV to represent and protect the VASP sector in Mexico.</span>
+    </p>
+
+    <div class="team-grid">
+
+      <!-- Mauricio Aguilar -->
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img class="team-photo" src="Assets/Mauricio%20Aguilar.jpg" alt="Mauricio Aguilar Sánchez" loading="lazy"/>
+        </div>
+        <div class="team-role" data-es>Presidente</div>
+        <div class="team-role" data-en>President</div>
+        <div class="team-name">Mauricio Aguilar Sánchez</div>
+        <div class="team-company" data-es>Hermosillo Reséndiz Abogados · Exelta<br/>Compliance, regulación VASP, Fintech, Capital Privado</div>
+        <div class="team-company" data-en>Hermosillo Reséndiz Abogados · Exelta<br/>Compliance, VASP regulation, Fintech, Private Capital</div>
+        <div class="team-tags">
+          <span class="team-tag" data-es>Operación</span><span class="team-tag" data-en>Operations</span>
+          <span class="team-tag" data-es>Regulación AV</span><span class="team-tag" data-en>VA Regulation</span>
+          <span class="team-tag">Lobbying</span>
+          <span class="team-tag">Gateway</span>
+        </div>
+      </div>
+
+      <!-- Manuel (no photo) -->
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <div class="team-initials">MS</div>
+        </div>
+        <div class="team-role" data-es>Vicepresidente</div>
+        <div class="team-role" data-en>Vice President</div>
+        <div class="team-name">Manuel</div>
+        <div class="team-company" data-es>Silverstone · OTC · Compliance<br/>Core Bancario · Fintech</div>
+        <div class="team-company" data-en>Silverstone · OTC · Compliance<br/>Core Banking · Fintech</div>
+        <div class="team-tags">
+          <span class="team-tag">Networking</span>
+          <span class="team-tag" data-es>Estrategia</span><span class="team-tag" data-en>Strategy</span>
+          <span class="team-tag">Gateway</span>
+          <span class="team-tag" data-es>Membresía</span><span class="team-tag" data-en>Membership</span>
+        </div>
+      </div>
+
+      <!-- Juan Pablo -->
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img class="team-photo" src="Assets/Juan%20Pablo.png" alt="Juan Pablo" loading="lazy"/>
+        </div>
+        <div class="team-role" data-es>Secretario</div>
+        <div class="team-role" data-en>Secretary</div>
+        <div class="team-name">Juan Pablo</div>
+        <div class="team-company" data-es>Artu · Founder<br/>PLD/FT automatizado con IA · Exchanges cripto</div>
+        <div class="team-company" data-en>Artu · Founder<br/>AI-powered AML/CFT · Crypto exchanges</div>
+        <div class="team-tags">
+          <span class="team-tag">Compliance</span>
+          <span class="team-tag" data-es>Tecnología</span><span class="team-tag" data-en>Technology</span>
+          <span class="team-tag">PLD/FT</span>
+        </div>
+      </div>
+
+      <!-- Ayax Alcántara -->
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img class="team-photo" src="Assets/Ayax%20Alcantara.jpg" alt="Ayax Alcántara Rosas" loading="lazy"/>
+        </div>
+        <div class="team-role" data-es>Vocal · Mesa Legal</div>
+        <div class="team-role" data-en>Board Member · Legal</div>
+        <div class="team-name">Ayax Alcántara Rosas</div>
+        <div class="team-company" data-es>Easy4u<br/>Licencias y autorizaciones financieras reguladas</div>
+        <div class="team-company" data-en>Easy4u<br/>Financial licenses and regulatory authorizations</div>
+        <div class="team-tags">
+          <span class="team-tag">Lobbying</span>
+          <span class="team-tag" data-es>Mesa Legal</span><span class="team-tag" data-en>Legal Committee</span>
+          <span class="team-tag" data-es>Licencias</span><span class="team-tag" data-en>Licensing</span>
+        </div>
+      </div>
+
+      <!-- Julián -->
+      <div class="team-card">
+        <div class="team-photo-wrap">
+          <img class="team-photo" src="Assets/Julian.jpg" alt="Julián" loading="lazy"/>
+        </div>
+        <div class="team-role" data-es>Vocal · Adopción Cripto</div>
+        <div class="team-role" data-en>Board Member · Crypto Adoption</div>
+        <div class="team-name">Julián</div>
+        <div class="team-company" data-es>B4Bit<br/>Pasarela cripto (crypto payment gateway)</div>
+        <div class="team-company" data-en>B4Bit<br/>Crypto payment gateway</div>
+        <div class="team-tags">
+          <span class="team-tag" data-es>Adopción</span><span class="team-tag" data-en>Adoption</span>
+          <span class="team-tag" data-es>Regulación AV</span><span class="team-tag" data-en>VA Regulation</span>
+          <span class="team-tag" data-es>Eventos</span><span class="team-tag" data-en>Events</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
