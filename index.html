@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>APSAV — Asociación de Proveedores de Servicios de Activos Virtuales</title>
+<meta name="description" content="El primer think tank técnico-legal especializado 100% en VASP de México. Educación, Compliance, Adopción y puerta de entrada al mercado cripto mexicano."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── TOKENS (Artu × APSAV) ─── */
+:root {
+  --navy:         #0C1B2E;
+  --navy-mid:     #152540;
+  --navy-light:   #1e3a5f;
+  --gold:         #C49A3C;
+  --gold-light:   #E8C06E;
+  --gold-pale:    rgba(196,154,60,0.12);
+  --cream:        #FAF6EE;
+  --cream-off:    #F2EDE3;
+  --text-dark:    #0C1B2E;
+  --text-muted:   #4A5568;
+  --text-light:   rgba(255,255,255,0.7);
+  --border:       rgba(196,154,60,0.22);
+  --border-dim:   rgba(196,154,60,0.10);
+
+  /* Artu brand */
+  --artu-green:   #0b4147;
+  --artu-blue:    #2545ba;
+  --artu-aqua:    #0ad6ac;
+
+  --radius-sm:    8px;
+  --radius-md:    16px;
+  --radius-lg:    24px;
+  --radius-pill:  999px;
+
+  --shadow-sm:    0 1px 4px rgba(11,65,71,.06), 0 2px 12px rgba(11,65,71,.04);
+  --shadow-md:    0 4px 24px rgba(11,65,71,.10), 0 1px 4px rgba(11,65,71,.06);
+}
+
+/* ─── BASE ─── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #EDE8DF;
+  color: var(--text-dark);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ─── LANG TOGGLE ─── */
+[data-lang="es"] [data-en],
+[data-lang="en"] [data-es] { display: none !important; }
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12,27,46,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196,154,60,0.15);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.nav-logo-svg { width: 36px; height: 36px; flex-shrink: 0; }
+
+.nav-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-pill);
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-link:hover { color: var(--gold-light); background: rgba(196,154,60,0.08); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid rgba(196,154,60,0.3);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.lang-btn {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  transition: color 0.2s, background 0.2s;
+}
+
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-cta-nav {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.btn-cta-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 2rem 5rem;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 40%, rgba(196,154,60,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at -10% 100%, rgba(10,214,172,0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy) 0%, var(--gold) 50%, var(--navy) 100%);
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-title em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  max-width: 500px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: background 0.22s, transform 0.15s, box-shadow 0.22s;
+  box-shadow: 0 4px 20px rgba(196,154,60,0.3);
+}
+
+.btn-primary:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(196,154,60,0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: color 0.22s, border-color 0.22s, background 0.22s;
+}
+
+.btn-secondary:hover {
+  color: #fff;
+  border-color: rgba(196,154,60,0.5);
+  background: rgba(196,154,60,0.07);
+}
+
+/* HERO VISUAL CARD */
+.hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hero-stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(196,154,60,0.18);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.4rem;
+  backdrop-filter: blur(8px);
+}
+
+.hero-stat-card .stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.35rem;
+}
+
+.hero-stat-card .stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+
+.hero-stat-card .stat-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+}
+
+.hero-stat-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ─── SECTION WRAPPER ─── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.section-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 0.5px;
+  background: var(--border);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  font-weight: 300;
+  max-width: 560px;
+}
+
+/* ─── COMPLIANCE CTA STRIP ─── */
+.cta-strip {
+  background: linear-gradient(135deg, var(--artu-green) 0%, #0b4147 50%, var(--navy-mid) 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+.cta-strip::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(10,214,172,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cta-strip-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-strip-left {}
+
+.cta-strip-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--artu-aqua);
+  margin-bottom: 0.6rem;
+}
+
+.cta-strip-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.cta-strip-desc {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  line-height: 1.55;
+  max-width: 440px;
+}
+
+.btn-compliance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--artu-aqua);
+  border: none;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.22s, transform 0.15s, box-shadow 0.22s;
+  box-shadow: 0 4px 24px rgba(10,214,172,0.35);
+}
+
+.btn-compliance:hover {
+  background: #1af0c4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(10,214,172,0.5);
+}
+
+.btn-compliance svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ─── PILLARS / VALUE AXES ─── */
+.pillars-bg { background: var(--cream); }
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 2.5rem;
+}
+
+.pillar {
+  padding: 1.5rem 1.25rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  transition: background 0.22s;
+  position: relative;
+}
+
+.pillar:hover { background: rgba(196,154,60,0.03); }
+.pillar.featured { background: rgba(196,154,60,0.04); }
+.pillar:nth-child(4n) { border-right: none; }
+.pillar:nth-child(n+5) { border-bottom: none; }
+.pillar:nth-child(7) { border-right: none; }
+.pillar-spacer { border-right: none; border-bottom: none; background: transparent; }
+
+.pillar-icon { width: 28px; height: 28px; margin-bottom: 0.75rem; }
+
+.pillar-tag {
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.pillar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.pillar-desc {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.new-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: var(--navy);
+  color: var(--gold-light);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.18rem 0.45rem;
+  border-radius: 2px;
+}
+
+/* ─── THINK TANK SECTION ─── */
+.tt-bg { background: #fff; }
+
+.tt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.tt-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: box-shadow 0.22s, transform 0.22s;
+}
+
+.tt-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.tt-card-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--gold-pale);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tt-card-icon svg { width: 18px; height: 18px; }
+
+.tt-card-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+}
+
+.tt-card-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ─── SRO VISION ─── */
+.sro-bg { background: var(--navy); }
+
+.sro-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.sro-header {
+  margin-bottom: 2.5rem;
+}
+
+.sro-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.sro-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.sro-title em { color: var(--gold-light); font-style: normal; }
+
+.sro-desc {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.sro-cases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.sro-case {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(196,154,60,0.18);
+  border-radius: var(--radius-md);
+  padding: 1.4rem;
+  transition: background 0.22s, border-color 0.22s;
+}
+
+.sro-case:hover {
+  background: rgba(196,154,60,0.06);
+  border-color: rgba(196,154,60,0.35);
+}
+
+.sro-case-flag {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  display: inline-block;
+  background: rgba(196,154,60,0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.sro-case-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.sro-case-desc {
+  font-size: 0.73rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ─── MEMBERSHIP ─── */
+.membership-bg { background: var(--cream); }
+
+.membership-card {
+  background: #fff;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 2.5rem;
+  box-shadow: var(--shadow-md);
+}
+
+.mc-badge {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.mc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.mc-opening {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.mc-price {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.55;
+  margin-bottom: 0.5rem;
+}
+
+.mc-price strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.mc-deductible {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--artu-green);
+  background: rgba(11,65,71,0.07);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  margin-top: 0.4rem;
+}
+
+.mc-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mc-benefits li {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.45;
+}
+
+.mc-benefits li::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='7' cy='7' r='6' stroke='%23C49A3C' stroke-width='1'/%3E%3Cpath d='M4.5 7l1.8 1.8L9.5 5' stroke='%23C49A3C' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/cover no-repeat;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* ─── CONTACT / FOOTER ─── */
+.footer-bg { background: var(--navy-mid); }
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 2.5rem;
+}
+
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(196,154,60,0.15);
+  flex-wrap: wrap;
+}
+
+.footer-brand {}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.footer-tagline {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+.footer-contact-block {}
+
+.footer-contact-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.footer-contact-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.footer-contact-email {
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.footer-contact-email:hover { text-decoration: underline; }
+
+.footer-cta-block { display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
+
+.footer-bottom {
+  padding-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.3);
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.footer-legal {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-visual { display: none; }
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  .pillar:nth-child(2n) { border-right: none; }
+  .pillar:nth-child(n+5) { border-bottom: 1px solid var(--border); }
+  .pillar:last-child { border-bottom: none; }
+  .sro-cases { grid-template-columns: 1fr; }
+  .membership-card { grid-template-columns: 1fr; gap: 1.5rem; }
+  .tt-grid { grid-template-columns: 1fr; }
+  .cta-strip-inner { flex-direction: column; text-align: center; align-items: center; }
+  .footer-cta-block { align-items: flex-start; }
+  .nav-links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar { border-right: none; }
+  .hero { padding: 4rem 1.5rem 3rem; }
+  .section { padding: 3.5rem 1.5rem; }
+  .footer-top { flex-direction: column; }
+  .footer-cta-block { align-items: flex-start; }
+  .footer-bottom { flex-direction: column; }
+  .hero-stat-row { grid-template-columns: 1fr; }
+}
+
+/* Print */
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nav, .cta-strip { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="APSAV inicio">
+      <!-- APSAV Logo SVG -->
+      <svg class="nav-logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="none" stroke="#C49A3C" stroke-width="1.6"/>
+        <polygon points="20,7.5 31,13.75 31,26.25 20,32.5 9,26.25 9,13.75" fill="rgba(196,154,60,0.12)" stroke="#C49A3C" stroke-width="0.8"/>
+        <text x="20" y="25" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" font-weight="600" fill="#C49A3C" letter-spacing="1">AV</text>
+      </svg>
+      <span class="nav-logo-name">APSAV</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#ejes" class="nav-link" data-es>Ejes de Valor</a>
+      <a href="#ejes" class="nav-link" data-en>Value Pillars</a>
+      <a href="#think-tank" class="nav-link" data-es>Think Tank</a>
+      <a href="#think-tank" class="nav-link" data-en>Think Tank</a>
+      <a href="#vision" class="nav-link" data-es>Visión SRO</a>
+      <a href="#vision" class="nav-link" data-en>SRO Vision</a>
+      <a href="#membresia" class="nav-link" data-es>Membresía</a>
+      <a href="#membresia" class="nav-link" data-en>Membership</a>
+    </div>
+
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+        <button class="lang-btn active" data-switch-lang="es" onclick="setLang('es')" aria-pressed="true">ES</button>
+        <button class="lang-btn" data-switch-lang="en" onclick="setLang('en')" aria-pressed="false">EN</button>
+      </div>
+      <a href="https://calendly.com/ceojuanpi/aliados-artu" target="_blank" rel="noopener" class="btn-cta-nav">
+        <span data-es>Agendar llamada</span>
+        <span data-en>Book a call</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span data-es>Constituida 2026 · México</span>
+        <span data-en>Founded 2026 · Mexico</span>
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        <span data-es>El <em>think tank técnico-legal</em> que lidera el sector VASP en México</span>
+        <span data-en>The <em>technical-legal think tank</em> leading the VASP sector in Mexico</span>
+      </h1>
+      <p class="hero-desc">
+        <span data-es>Educación · Compliance · Adopción · Puerta de entrada a México. La asociación que conecta a proveedores de servicios de activos virtuales con el ecosistema regulatorio, bancario y empresarial mexicano.</span>
+        <span data-en>Education · Compliance · Adoption · Gateway to Mexico. The association connecting virtual asset service providers with Mexico's regulatory, banking, and business ecosystem.</span>
+      </p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/ceojuanpi/aliados-artu" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8S4.41 14.5 8 14.5 14.5 11.59 14.5 8 11.59 1.5 8 1.5zm0 1.5a5 5 0 110 10A5 5 0 018 3zm-.75 2v3.56l2.72 1.63.75-1.26-2.22-1.33V5H7.25z" fill="currentColor"/></svg>
+          <span data-es>Ayuda con cumplimiento regulatorio para tu Crypto</span>
+          <span data-en>Crypto regulatory compliance help</span>
+        </a>
+        <a href="#membresia" class="btn-secondary">
+          <span data-es>Ver membresía</span>
+          <span data-en>View membership</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-stat-card">
+        <div class="stat-label" data-es>Constitución</div>
+        <div class="stat-label" data-en>Founded</div>
+        <div class="stat-value">2026</div>
+        <div class="stat-sub" data-es>Primer organismo gremial VASP en México</div>
+        <div class="stat-sub" data-en>First VASP trade body in Mexico</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="hero-stat-card">
+          <div class="stat-label">100%</div>
+          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);">VASP</div>
+          <div class="stat-sub" data-es>Especialización exclusiva</div>
+          <div class="stat-sub" data-en>Exclusive specialization</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="stat-label">7</div>
+          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);" data-es>Ejes</div>
+          <div class="stat-value" style="font-size:1.2rem; color: var(--gold-light);" data-en>Pillars</div>
+          <div class="stat-sub" data-es>De valor para asociados</div>
+          <div class="stat-sub" data-en>Of value for members</div>
+        </div>
+      </div>
+      <div class="hero-stat-card" style="background: rgba(196,154,60,0.06); border-color: rgba(196,154,60,0.3);">
+        <div class="stat-label" data-es>Visión</div>
+        <div class="stat-label" data-en>Vision</div>
+        <div class="stat-value" style="font-size:1rem; color: var(--gold-light); line-height:1.4;" data-es>Organismo autorregulatorio reconocido ante la UIF</div>
+        <div class="stat-value" style="font-size:1rem; color: var(--gold-light); line-height:1.4;" data-en>Recognized self-regulatory body before the UIF</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMPLIANCE CTA STRIP ─── -->
+<div class="cta-strip">
+  <div class="cta-strip-inner">
+    <div class="cta-strip-left">
+      <div class="cta-strip-eyebrow" data-es>Soporte especializado</div>
+      <div class="cta-strip-eyebrow" data-en>Specialized support</div>
+      <h2 class="cta-strip-title">
+        <span data-es>¿Tu empresa crypto necesita apoyo en cumplimiento regulatorio?</span>
+        <span data-en>Does your crypto business need regulatory compliance support?</span>
+      </h2>
+      <p class="cta-strip-desc">
+        <span data-es>Conecta con expertos en PLD/FT, CNBV y UIF. Agenda una sesión y recibe orientación personalizada para tu operación en México.</span>
+        <span data-en>Connect with AML/CFT, CNBV, and UIF experts. Book a session and receive personalized guidance for your operation in Mexico.</span>
+      </p>
+    </div>
+    <a href="https://calendly.com/ceojuanpi/aliados-artu" target="_blank" rel="noopener" class="btn-compliance">
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9S4.86 16.5 9 16.5 16.5 13.14 16.5 9 13.14 1.5 9 1.5zM9 3a6 6 0 110 12A6 6 0 019 3zm-.75 2.25v4.19l2.97 1.78.75-1.26-2.47-1.47V5.25H8.25z" fill="currentColor"/>
+      </svg>
+      <span data-es>Ayuda con cumplimiento regulatorio para tu Crypto</span>
+      <span data-en>Crypto regulatory compliance help</span>
+    </a>
+  </div>
+</div>
+
+<!-- ─── VALUE PILLARS ─── -->
+<section class="pillars-bg" id="ejes" aria-labelledby="ejes-title">
+  <div class="section">
+    <div class="section-label">
+      <span data-es>Ejes de valor para los asociados</span>
+      <span data-en>Value pillars for members</span>
+    </div>
+    <h2 class="section-title" id="ejes-title">
+      <span data-es>Siete razones para ser parte de APSAV</span>
+      <span data-en>Seven reasons to be part of APSAV</span>
+    </h2>
+    <p class="section-desc">
+      <span data-es>Desde autorregulación hasta gateway internacional, APSAV es la infraestructura gremial que el sector VASP en México necesitaba.</span>
+      <span data-en>From self-regulation to international gateway, APSAV is the industry infrastructure the VASP sector in Mexico needed.</span>
+    </p>
+
+    <div class="pillars-grid">
+      <!-- 1 Think Tank -->
+      <div class="pillar featured">
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="11" r="6.5" stroke="#C49A3C" stroke-width="1.2"/>
+          <path d="M10.5 16.5 Q10.5 21 14 21 Q17.5 21 17.5 16.5" stroke="#C49A3C" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+          <line x1="14" y1="21" x2="14" y2="24" stroke="#C49A3C" stroke-width="0.9"/>
+          <line x1="11.5" y1="24" x2="16.5" y2="24" stroke="#C49A3C" stroke-width="0.9" stroke-linecap="round"/>
+          <line x1="11" y1="8.5" x2="17" y2="8.5" stroke="#C49A3C" stroke-width="0.7"/>
+          <line x1="11" y1="11" x2="17" y2="11" stroke="#C49A3C" stroke-width="0.7"/>
+          <line x1="12" y1="13.5" x2="16" y2="13.5" stroke="#C49A3C" stroke-width="0.7"/>
+        </svg>
+        <div class="pillar-tag" data-es>Think Tank · Eje Fundacional</div>
+        <div class="pillar-tag" data-en>Think Tank · Foundational Pillar</div>
+        <div class="pillar-title" data-es>Autorregulación &amp; Think Tank VASP</div>
+        <div class="pillar-title" data-en>Self-Regulation &amp; VASP Think Tank</div>
+        <p class="pillar-desc" data-es>Producimos los protocolos de compliance del sector y construimos la ruta hacia el reconocimiento de APSAV como organismo autorregulatorio ante la UIF.</p>
+        <p class="pillar-desc" data-en>We produce the sector's compliance protocols and build the path toward APSAV's recognition as a self-regulatory body before the UIF.</p>
+      </div>
+
+      <!-- 2 Lobbying -->
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="10" r="4.5" stroke="#C49A3C" stroke-width="1.2"/>
+          <path d="M5.5 23.5c0-4.7 17-4.7 17 0" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+          <line x1="19.5" y1="5.5" x2="23" y2="3.5" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="20.5" y1="9" x2="24" y2="9" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="19.5" y1="13" x2="23" y2="15" stroke="#C49A3C" stroke-width="0.8"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 2</div>
+        <div class="pillar-tag" data-en>Pillar 2</div>
+        <div class="pillar-title" data-es>Lobbying Defensivo</div>
+        <div class="pillar-title" data-en>Defensive Lobbying</div>
+        <p class="pillar-desc" data-es>Interlocución directa con CNBV, UIF, Banxico y SAT. White Papers, propuestas regulatorias y agenda legislativa para el ecosistema VASP mexicano.</p>
+        <p class="pillar-desc" data-en>Direct dialogue with CNBV, UIF, Banxico and SAT. White Papers, regulatory proposals and legislative agenda for the Mexican VASP ecosystem.</p>
+      </div>
+
+      <!-- 3 Adopción -->
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="14" r="8" stroke="#C49A3C" stroke-width="1.2"/>
+          <line x1="14" y1="6" x2="14" y2="22" stroke="#C49A3C" stroke-width="0.7"/>
+          <path d="M10 8c0 0 4 2.5 4 6s-4 6-4 6" stroke="#C49A3C" stroke-width="0.7" fill="none"/>
+          <path d="M18 8c0 0-4 2.5-4 6s4 6 4 6" stroke="#C49A3C" stroke-width="0.7" fill="none"/>
+          <line x1="6" y1="14" x2="22" y2="14" stroke="#C49A3C" stroke-width="0.7"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 3</div>
+        <div class="pillar-tag" data-en>Pillar 3</div>
+        <div class="pillar-title" data-es>Adopción Crypto</div>
+        <div class="pillar-title" data-en>Crypto Adoption</div>
+        <p class="pillar-desc" data-es>Eventos presenciales, Crypto Summit y webinars para impulsar la adopción de activos virtuales en el sector privado, academia y gobierno.</p>
+        <p class="pillar-desc" data-en>In-person events, Crypto Summit and webinars to drive adoption of virtual assets across the private sector, academia, and government.</p>
+      </div>
+
+      <!-- 4 Educación Bancaria -->
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="3" y="8" width="22" height="14" rx="1.5" stroke="#C49A3C" stroke-width="1.2"/>
+          <line x1="3" y1="12" x2="25" y2="12" stroke="#C49A3C" stroke-width="0.8"/>
+          <circle cx="14" cy="17" r="2.2" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="8" y1="5" x2="8" y2="9" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="20" y1="5" x2="20" y2="9" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 4</div>
+        <div class="pillar-tag" data-en>Pillar 4</div>
+        <div class="pillar-title" data-es>Educación Bancaria</div>
+        <div class="pillar-title" data-en>Banking Education</div>
+        <p class="pillar-desc" data-es>Talleres con bancos y SOFOMEs para reducir la aversión al sector VASP y construir alianzas con el sistema financiero tradicional.</p>
+        <p class="pillar-desc" data-en>Workshops with banks and SOFOMEs to reduce VASP sector aversion and build alliances with the traditional financial system.</p>
+      </div>
+
+      <!-- 5 Gateway -->
+      <div class="pillar">
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <circle cx="14" cy="14" r="7.5" stroke="#C49A3C" stroke-width="1.2"/>
+          <path d="M14 6.5L14 21.5" stroke="#C49A3C" stroke-width="0.7" stroke-dasharray="1.5 1.5"/>
+          <path d="M6.5 14L21.5 14" stroke="#C49A3C" stroke-width="0.7" stroke-dasharray="1.5 1.5"/>
+          <path d="M9.5 9.5L21 7L18.5 18.5L7 21Z" stroke="#C49A3C" stroke-width="0.9" fill="rgba(196,154,60,0.1)" stroke-linejoin="round"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 5</div>
+        <div class="pillar-tag" data-en>Pillar 5</div>
+        <div class="pillar-title" data-es>Gateway Cripto–MX</div>
+        <div class="pillar-title" data-en>Crypto–MX Gateway</div>
+        <p class="pillar-desc" data-es>Punto de entrada único para proyectos cripto internacionales. Red integrada de aliados legales, regulatorios, bancarios y comerciales en México.</p>
+        <p class="pillar-desc" data-en>Unique entry point for international crypto projects. Integrated network of legal, regulatory, banking and commercial partners in Mexico.</p>
+      </div>
+
+      <!-- 6 Certificación -->
+      <div class="pillar featured">
+        <div class="new-badge" data-es>Nuevo</div>
+        <div class="new-badge" data-en>New</div>
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <path d="M14 3L16.8 9.8L24.5 10L19 15L20.8 22.5L14 18.5L7.2 22.5L9 15L3.5 10L11.2 9.8Z" stroke="#C49A3C" stroke-width="1.1" fill="rgba(196,154,60,0.1)" stroke-linejoin="round"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 6</div>
+        <div class="pillar-tag" data-en>Pillar 6</div>
+        <div class="pillar-title" data-es>Certificación APSAV</div>
+        <div class="pillar-title" data-en>APSAV Certification</div>
+        <p class="pillar-desc" data-es>El sello que te convierte en empresa confiable ante el mercado. Ser miembro de APSAV acredita tu cumplimiento regulatorio y compromiso con las mejores prácticas del sector.</p>
+        <p class="pillar-desc" data-en>The seal that makes you a trusted company in the market. APSAV membership accredits your regulatory compliance and commitment to the sector's best practices.</p>
+      </div>
+
+      <!-- 7 Alianzas -->
+      <div class="pillar featured">
+        <div class="new-badge" data-es>Nuevo</div>
+        <div class="new-badge" data-en>New</div>
+        <svg class="pillar-icon" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+          <rect x="2.5" y="5" width="23" height="17" rx="1.5" stroke="#C49A3C" stroke-width="1.2"/>
+          <line x1="2.5" y1="10" x2="25.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="9.5" y1="5" x2="9.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="18.5" y1="5" x2="18.5" y2="10" stroke="#C49A3C" stroke-width="0.8"/>
+          <circle cx="10" cy="17" r="2.5" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="14.5" y1="15.5" x2="21.5" y2="15.5" stroke="#C49A3C" stroke-width="0.8"/>
+          <line x1="14.5" y1="18.5" x2="21.5" y2="18.5" stroke="#C49A3C" stroke-width="0.8"/>
+        </svg>
+        <div class="pillar-tag" data-es>Eje 7</div>
+        <div class="pillar-tag" data-en>Pillar 7</div>
+        <div class="pillar-title" data-es>Alianzas con Cámaras</div>
+        <div class="pillar-title" data-en>Chamber Alliances</div>
+        <p class="pillar-desc" data-es>Convenios con cámaras empresariales para ofrecer soluciones de activos virtuales a sus agremiados. APSAV como puente entre el ecosistema cripto y la empresa tradicional.</p>
+        <p class="pillar-desc" data-en>Agreements with business chambers to offer virtual asset solutions to their members. APSAV as bridge between the crypto ecosystem and traditional business.</p>
+      </div>
+
+      <!-- Spacer -->
+      <div class="pillar pillar-spacer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THINK TANK ─── -->
+<section class="tt-bg" id="think-tank" aria-labelledby="tt-title">
+  <div class="section">
+    <div class="section-label">
+      <span data-es>Think Tank VASP · Servicios técnicos</span>
+      <span data-en>VASP Think Tank · Technical services</span>
+    </div>
+    <h2 class="section-title" id="tt-title">
+      <span data-es>El cuerpo técnico que escribe las reglas de la industria</span>
+      <span data-en>The technical body that writes the industry's rules</span>
+    </h2>
+    <p class="section-desc">
+      <span data-es>Acceso exclusivo para miembros a los recursos del Think Tank APSAV: validación, análisis, protocolos y red estratégica.</span>
+      <span data-en>Exclusive member access to APSAV Think Tank resources: validation, analysis, protocols, and strategic network.</span>
+    </p>
+
+    <div class="tt-grid">
+      <div class="tt-card">
+        <div class="tt-card-icon">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 1.5L11.2 6.8L17 7L12.5 11.2L14 17L9 14L4 17L5.5 11.2L1 7L6.8 6.8Z" stroke="#C49A3C" stroke-width="1.2" fill="rgba(196,154,60,0.15)" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tt-card-title" data-es>Validación de tesis comerciales</div>
+        <div class="tt-card-title" data-en>Commercial thesis validation</div>
+        <p class="tt-card-desc" data-es>Prueba tu modelo de negocio ante abogados, compliance officers y ex-reguladores antes de invertir. Reduce el riesgo regulatorio desde el diseño.</p>
+        <p class="tt-card-desc" data-en>Test your business model before lawyers, compliance officers and ex-regulators before investing. Reduce regulatory risk from the design stage.</p>
+      </div>
+
+      <div class="tt-card">
+        <div class="tt-card-icon">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="9" cy="9" r="7" stroke="#C49A3C" stroke-width="1.2"/>
+            <path d="M9 4v5l3 2" stroke="#C49A3C" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tt-card-title" data-es>Análisis regulatorio VASP</div>
+        <div class="tt-card-title" data-en>VASP regulatory analysis</div>
+        <p class="tt-card-desc" data-es>Mapeo de riesgos legales, fiscales y PLD/FT para nuevos productos o servicios del sector. Actualizaciones continuas sobre cambios normativos.</p>
+        <p class="tt-card-desc" data-en>Mapping of legal, tax and AML/CFT risks for new sector products or services. Continuous updates on regulatory changes.</p>
+      </div>
+
+      <div class="tt-card">
+        <div class="tt-card-icon">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <rect x="2" y="2" width="14" height="14" rx="2" stroke="#C49A3C" stroke-width="1.2"/>
+            <path d="M5 9l2.5 2.5L13 6" stroke="#C49A3C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="tt-card-title" data-es>Protocolo APSAV de compliance</div>
+        <div class="tt-card-title" data-en>APSAV compliance protocol</div>
+        <p class="tt-card-desc" data-es>Estándar técnico de cumplimiento para VASP: el mismo que fundamenta la aspiración autorreguladora ante la UIF. Herramienta viva y actualizada.</p>
+        <p class="tt-card-desc" data-en>Technical compliance standard for VASPs: the same one that underpins the self-regulatory aspiration before the UIF. A living, updated tool.</p>
+      </div>
+
+      <div class="tt-card">
+        <div class="tt-card-icon">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <circle cx="6" cy="6" r="3" stroke="#C49A3C" stroke-width="1.2"/>
+            <circle cx="12" cy="12" r="3" stroke="#C49A3C" stroke-width="1.2"/>
+            <path d="M9 6h2a3 3 0 013 3v0" stroke="#C49A3C" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="tt-card-title" data-es>Sesiones estratégicas</div>
+        <div class="tt-card-title" data-en>Strategic sessions</div>
+        <p class="tt-card-desc" data-es>Acceso al Consejo Directivo y red de aliados de APSAV para decisiones críticas de negocio y regulación. Inteligencia colectiva del sector.</p>
+        <p class="tt-card-desc" data-en>Access to APSAV's Board of Directors and partner network for critical business and regulatory decisions. Collective sector intelligence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SRO VISION ─── -->
+<section class="sro-bg" id="vision" aria-labelledby="vision-title">
+  <div class="sro-section">
+    <div class="sro-header">
+      <div class="sro-eyebrow">
+        <span data-es>Visión de largo plazo</span>
+        <span data-en>Long-term vision</span>
+      </div>
+      <h2 class="sro-title" id="vision-title">
+        <span data-es>APSAV como <em>organismo autorregulatorio</em> reconocido</span>
+        <span data-en>APSAV as a <em>recognized self-regulatory body</em></span>
+      </h2>
+      <p class="sro-desc" data-es>El objetivo estratégico: que la UIF reconozca a APSAV como el organismo que implementa y supervisa el cumplimiento del sector VASP en México — delegando en la industria la autorregulación que hoy carece de representación técnica.</p>
+      <p class="sro-desc" data-en>The strategic objective: for the UIF to recognize APSAV as the body that implements and supervises compliance in Mexico's VASP sector — delegating to the industry the self-regulation that today lacks technical representation.</p>
+    </div>
+
+    <div class="sro-cases">
+      <div class="sro-case">
+        <div class="sro-case-flag">México · CNBV</div>
+        <div class="sro-case-name" data-es>AMIB — Organismo autorregulatorio del mercado de valores</div>
+        <div class="sro-case-name" data-en>AMIB — Self-regulatory body for the securities market</div>
+        <p class="sro-case-desc" data-es>Reconocida bajo el Art. 228 de la Ley del Mercado de Valores, la AMIB certifica a operadores bursátiles y supervisa a sus miembros bajo mandato de la CNBV. Es el modelo doméstico más próximo al que APSAV aspira en el sector VASP.</p>
+        <p class="sro-case-desc" data-en>Recognized under Art. 228 of the Securities Market Law, AMIB certifies stock market operators and supervises its members under CNBV mandate. It is the closest domestic model to what APSAV aspires to in the VASP sector.</p>
+      </div>
+
+      <div class="sro-case">
+        <div class="sro-case-flag">Japón · FSA</div>
+        <div class="sro-case-name" data-es>JVCEA — El referente global para VASPs</div>
+        <div class="sro-case-name" data-en>JVCEA — The global benchmark for VASPs</div>
+        <p class="sro-case-desc" data-es>La FSA certificó a la Japan Virtual and Crypto Assets Exchange Association como el organismo autorregulatorio oficial del sector cripto, delegándole la facultad de emitir y hacer cumplir regulaciones para todos los VASPs japoneses.</p>
+        <p class="sro-case-desc" data-en>The FSA certified the Japan Virtual and Crypto Assets Exchange Association as the official self-regulatory body for the crypto sector, delegating the authority to issue and enforce regulations for all Japanese VASPs.</p>
+      </div>
+
+      <div class="sro-case">
+        <div class="sro-case-flag">Corea del Sur · FSC</div>
+        <div class="sro-case-name" data-es>DAXA — Autorregulación sectorial en coordinación con el regulador</div>
+        <div class="sro-case-name" data-en>DAXA — Sectoral self-regulation in coordination with the regulator</div>
+        <p class="sro-case-desc" data-es>La Digital Asset eXchange Alliance desarrolló junto a la FSC los estándares de compliance, listing y protección de usuarios — el National Assembly promovió explícitamente el marco autorregulatorio.</p>
+        <p class="sro-case-desc" data-en>The Digital Asset eXchange Alliance developed with the FSC the compliance, listing and user protection standards — the National Assembly explicitly promoted the self-regulatory framework.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MEMBERSHIP ─── -->
+<section class="membership-bg" id="membresia" aria-labelledby="membership-title">
+  <div class="section">
+    <div class="section-label">
+      <span data-es>Membresía corporativa · Apertura Q4 2026</span>
+      <span data-en>Corporate membership · Opening Q4 2026</span>
+    </div>
+    <h2 class="section-title" id="membership-title">
+      <span data-es>Sé parte del gremio que define el sector</span>
+      <span data-en>Be part of the guild that defines the sector</span>
+    </h2>
+
+    <div class="membership-card">
+      <div>
+        <div class="mc-badge" data-es>Miembro APSAV</div>
+        <div class="mc-badge" data-en>APSAV Member</div>
+        <div class="mc-name" data-es>Membresía Corporativa</div>
+        <div class="mc-name" data-en>Corporate Membership</div>
+        <p class="mc-opening" data-es>Apertura Q4 2026 · Cupos limitados</p>
+        <p class="mc-opening" data-en>Opening Q4 2026 · Limited spots</p>
+        <div class="mc-price">
+          <strong>$30,000 – $100,000 MXN</strong>
+          <span data-es>Cuota anual por nivel</span>
+          <span data-en>Annual fee by tier</span>
+        </div>
+        <div class="mc-deductible">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2 6l2.5 2.5L10 4" stroke="#0b4147" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-es>100% deducible de ISR</span>
+          <span data-en>100% tax deductible</span>
+        </div>
+      </div>
+
+      <div>
+        <ul class="mc-benefits">
+          <li data-es>Sello de Certificación APSAV ante clientes y socios — acreditación pública de compliance</li>
+          <li data-en>APSAV Certification seal before clients and partners — public compliance accreditation</li>
+          <li data-es>Acceso al Think Tank: validación de tesis comerciales y regulatorias con especialistas</li>
+          <li data-en>Think Tank access: validation of commercial and regulatory theses with specialists</li>
+          <li data-es>Protocolo APSAV de Compliance VASP y actualizaciones regulatorias del sector</li>
+          <li data-en>APSAV VASP Compliance Protocol and sector regulatory updates</li>
+          <li data-es>Representación gremial ante CNBV, UIF, Banxico y SAT</li>
+          <li data-en>Guild representation before CNBV, UIF, Banxico and SAT</li>
+        </ul>
+      </div>
+
+      <div>
+        <ul class="mc-benefits">
+          <li data-es>Participación en eventos, webinars y Crypto Summit regional</li>
+          <li data-en>Participation in events, webinars and regional Crypto Summit</li>
+          <li data-es>Acceso al Gateway Cripto–MX: red de aliados legales, regulatorios y bancarios</li>
+          <li data-en>Crypto–MX Gateway access: network of legal, regulatory, and banking partners</li>
+          <li data-es>Tecnología de compliance con tarifa preferencial (PLD/FT automatizado)</li>
+          <li data-en>Compliance technology at preferential rates (automated AML/CFT)</li>
+          <li data-es>Conexión con cámaras empresariales y aliados del ecosistema fintech</li>
+          <li data-en>Connection with business chambers and fintech ecosystem partners</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; text-align:center;">
+      <a href="https://calendly.com/ceojuanpi/aliados-artu" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8S4.41 14.5 8 14.5 14.5 11.59 14.5 8 11.59 1.5 8 1.5zm0 1.5a5 5 0 110 10A5 5 0 018 3zm-.75 2v3.56l2.72 1.63.75-1.26-2.22-1.33V5H7.25z" fill="currentColor"/></svg>
+        <span data-es>Agenda una llamada para más información</span>
+        <span data-en>Book a call for more information</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer-bg" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <polygon points="20,2 36,11 36,29 20,38 4,29 4,11" fill="none" stroke="#C49A3C" stroke-width="1.5"/>
+            <polygon points="20,7.5 31,13.75 31,26.25 20,32.5 9,26.25 9,13.75" fill="rgba(196,154,60,0.1)" stroke="#C49A3C" stroke-width="0.75"/>
+            <text x="20" y="25" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" font-weight="600" fill="#C49A3C" letter-spacing="1">AV</text>
+          </svg>
+          <div class="footer-logo-name">APSAV</div>
+        </div>
+        <p class="footer-tagline" data-es>Asociación de Proveedores de Servicios de Activos Virtuales · A.C. · Educación · Compliance · Adopción · Puerta de entrada a México.</p>
+        <p class="footer-tagline" data-en>Association of Virtual Asset Service Providers · A.C. · Education · Compliance · Adoption · Gateway to Mexico.</p>
+      </div>
+
+      <div class="footer-contact-block">
+        <div class="footer-contact-label" data-es>Contacto</div>
+        <div class="footer-contact-label" data-en>Contact</div>
+        <div class="footer-contact-name">Mauricio Aguilar Sánchez</div>
+        <a href="mailto:maguilar@hermosilloresendiz.com" class="footer-contact-email">maguilar@hermosilloresendiz.com</a>
+      </div>
+
+      <div class="footer-cta-block">
+        <a href="https://calendly.com/ceojuanpi/aliados-artu" target="_blank" rel="noopener" class="btn-compliance" style="font-size:0.82rem; padding:0.75rem 1.4rem;">
+          <svg viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9S4.86 16.5 9 16.5 16.5 13.14 16.5 9 13.14 1.5 9 1.5zM9 3a6 6 0 110 12A6 6 0 019 3zm-.75 2.25v4.19l2.97 1.78.75-1.26-2.47-1.47V5.25H8.25z" fill="currentColor"/>
+          </svg>
+          <span data-es>Ayuda con cumplimiento regulatorio para tu Crypto</span>
+          <span data-en>Crypto regulatory compliance help</span>
+        </a>
+        <p style="font-size:0.65rem; color:rgba(255,255,255,0.3); text-align:right;" data-es>Agenda una sesión de orientación gratuita</p>
+        <p style="font-size:0.65rem; color:rgba(255,255,255,0.3); text-align:right;" data-en>Book a free orientation session</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-quote">
+        <span data-es>"Donde la educación, el compliance, la adopción y la puerta de entrada a México se encuentran."</span>
+        <span data-en>"Where education, compliance, adoption, and Mexico's gateway converge."</span>
+      </div>
+      <div class="footer-legal">© 2026 APSAV A.C. · México</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const isActive = btn.getAttribute('data-switch-lang') === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', isActive.toString());
+  });
+  document.documentElement.setAttribute('lang', lang);
+}
+
+// Detect browser language on load
+(function() {
+  const browserLang = navigator.language || navigator.userLanguage || 'es';
+  if (browserLang.toLowerCase().startsWith('en')) {
+    setLang('en');
+  }
+})();
+</script>
+</body>
+</html>
